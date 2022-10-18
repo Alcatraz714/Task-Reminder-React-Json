@@ -20,7 +20,7 @@ function App() {
   }, [])
   // Fetch data 
   const fetchTasks = async () => {
-    const res = await fetch('http://localhost:5000/tasks')
+    const res = await fetch(`${process.env.REACT_APP_BASE_URL}/tasks`)
     const data = await res.json()
 
     return data
@@ -28,7 +28,7 @@ function App() {
 
   // Fetch task 
   const fetchTask = async (id) => {
-    const res = await fetch(`http://localhost:5000/tasks/${id}`)
+    const res = await fetch(`${process.env.REACT_APP_BASE_URL}/tasks/${id}`)
     const data = await res.json()
 
     return data
@@ -36,7 +36,7 @@ function App() {
 
   // add Tasks 
   const addTask = async (task) => {
-    const res = await fetch('http://localhost:5000/tasks', {
+    const res = await fetch(`${process.env.REACT_APP_BASE_URL}/tasks`, {
       method:'POST',
       headers: {
         'Content-type': 'application/json'
@@ -56,7 +56,7 @@ function App() {
   // delete tasks
   const deleteTask = (id) => {
     const deleteTask = async (id) => {
-      await fetch(`http://localhost:5000/tasks/${id}`, {
+      await fetch(`${process.env.REACT_APP_BASE_URL}/tasks/${id}`, {
         method: 'DELETE'
       })
     }
@@ -67,7 +67,7 @@ function App() {
   const toggleReminder = async(id) =>{
     const taskToToggle = await fetchTask(id)
     const updTask = { ...taskToToggle, reminder: !taskToToggle.reminder}
-    const res = await fetch(`http://localhost:5000/tasks/%{id}`, {
+    const res = await fetch(`${process.env.REACT_APP_BASE_URL}/tasks/%{id}`, {
       method:'PUT',
       headers: {
         'Content-type': 'apllication/json'
